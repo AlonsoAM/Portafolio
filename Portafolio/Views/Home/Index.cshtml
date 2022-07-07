@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Persona
+
+@{
+    ViewData["Title"] = "Página Principal";
+    string ConvertirEnMayusculas(string valor)
+    {
+        return valor.ToUpper();
+    }
+    DateTime hoy = DateTime.Now;
+    var nombres = new List<string>() { "Felipe", "Claudio", "Andres" };
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <ul>
+        @foreach (var nombre in nombres)
+        {
+            <li>@nombre</li>
+        }
+    </ul>
+    <h1 class="display-4">Soy @ConvertirEnMayusculas(@Model.Nombre)  (@Model.Edad)</h1>
+    <h4>@hoy.ToString("dd/MM/yyyy hh:mm:ss tt")</h4>
+    @if (Model.Edad >= 18)
+    {
+        <h4>Eres mayor de edad! Puedes pasar <button class="btn btn-primary">Entrar</button></h4>
+    }
+    else
+    {
+        <h4>No eres mayor de edad! NO Puedes pasar!!! <button class="btn btn-danger" disabled>Entrar</button></h4>
+    }
+    <h2>Soy un desarrollador full stack especializado en tecnologías .Net y JavaScript</h2>
+    <img id="foto" src="~/imagenes/foto.png" alt="Foto de Alonso Anchante" />
 </div>
