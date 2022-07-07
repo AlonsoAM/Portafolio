@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portafolio.Models;
+using Portafolio.Servicios;
 using System.Diagnostics;
 
 namespace Portafolio.Controllers
@@ -15,14 +16,16 @@ namespace Portafolio.Controllers
 
         public IActionResult Index()
         {
-            var persona = new Persona()
+            var repositorioProyectos = new RepositorioProyectos();
+            var proyectos = repositorioProyectos.ObtenerProyectos().Take(3).ToList();
+            var modelo = new HomeIndexViewModel()
             {
-                Nombre = "Alonso Anchante",
-                Edad = 27
+                Proyectos = proyectos,
             };
-            //ViewBag.Nombre = "Alonso Anchante Moreno";
-            return View(persona);
+            return View(modelo);
         }
+
+       
 
         public IActionResult Privacy()
         {
